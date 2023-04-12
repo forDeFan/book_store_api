@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     # Project apps
     "bookstore",
     "core",
+    # Extra
+    "django_probes",
 ]
 
 MIDDLEWARE = [
@@ -93,7 +95,6 @@ DATABASES = {
         "PASSWORD": os.environ.get("DB_PASS"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
