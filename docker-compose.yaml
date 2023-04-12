@@ -11,6 +11,9 @@ networks:
 services:
 
   app:
+    # To pass constants from .env during build
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: build/Dockerfile.api
