@@ -1,0 +1,4 @@
+# Can be set up in compose directly but decided to go for separate file
+# to allow more customization if needed ex. script running etc.
+
+FROM postgres:13-alpine

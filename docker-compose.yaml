@@ -22,6 +22,22 @@ services:
     # To get mirroring of container dirs to local folder/ two way relation
     volumes:
       - ./app:/app
+    depends_on:
+      - db
     command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - bookstore_network
+  
+  db:
+    build:
+      context: .
+      dockerfile: build/Dockerfile.db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    # Fetch from .env
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
     networks:
       - bookstore_network
