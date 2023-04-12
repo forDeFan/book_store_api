@@ -19,5 +19,6 @@ services:
     # To get mirroring of container dirs to local folder/ two way relation
     volumes:
       - ./app:/app
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
     networks:
       - bookstore_network
