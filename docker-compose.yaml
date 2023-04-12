@@ -1,0 +1,23 @@
+version: "3.5"
+
+volumes:
+  postgres_data:
+
+networks:
+  bookstore_network:
+    name: bookstore_network
+    driver: bridge
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: build/Dockerfile.api
+    ports:
+      - "8000:8000"
+    # To get mirroring of container dirs to local folder/ two way relation
+    volumes:
+      - ./app:/app
+    networks:
+      - bookstore_network
