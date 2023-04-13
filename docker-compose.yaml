@@ -17,6 +17,8 @@ services:
     build:
       context: .
       dockerfile: build/Dockerfile.api
+    container_name: api
+    restart: always
     ports:
       - "8000:8000"
     # To get mirroring of container dirs to local folder/ two way relation
@@ -36,6 +38,8 @@ services:
     build:
       context: .
       dockerfile: build/Dockerfile.db
+    container_name: database
+    restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     # Fetch from .env
