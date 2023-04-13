@@ -40,3 +40,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # As user identifier
     USERNAME_FIELD = "email"
+
+
+class Book(models.Model):
+    """Book model class."""
+
+    created = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    author = models.CharField(max_length=255, null=False, blank=False)
+    published_date = models.DateField(blank=False)
+    images = models.FileField(blank=True, upload_to="images/")
+
+    def __str__(self) -> str:
+        return self.title
