@@ -3,3 +3,4 @@ djangorestframework==3.14.0
 python-dotenv==1.0.0
 psycopg2==2.8.6
 django-probes==1.7.0
+pytest==7.3.0
