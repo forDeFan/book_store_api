@@ -47,8 +47,9 @@ INSTALLED_APPS = [
     # Project apps
     "bookstore",
     "core",
+    "user", # user api
     # Extra
-    "django_probes",
+    "django_probes"
 ]
 
 MIDDLEWARE = [
