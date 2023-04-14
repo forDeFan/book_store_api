@@ -1,3 +1,5 @@
+"""Central file for url mappings/ menaging."""
+
 from django.contrib import admin
 from django.urls import include, path
 
