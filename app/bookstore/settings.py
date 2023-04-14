@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     "core",
     "user", # user api
     # Extra
-    "django_probes"
+    "django_probes",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
