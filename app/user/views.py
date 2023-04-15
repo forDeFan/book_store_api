@@ -1,3 +1,5 @@
+"""User API views."""
+
 from rest_framework import generics, permissions, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -12,7 +14,7 @@ from user.seralizers import (
 )
 
 
-class CreateUser(generics.CreateAPIView):
+class CreateUserView(generics.CreateAPIView):
     """
     Create new user during registration process.
     User checkup in the db perform automatically

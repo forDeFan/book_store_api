@@ -7,8 +7,8 @@ from rest_framework_simplejwt.views import TokenRefreshView
 app_name = "user"
 
 urlpatterns = [
-    path("register/", views.CreateUser.as_view(), name="register"),
+    path("register/", views.CreateUserView.as_view(), name="register"),
     path("login/", views.LoginView.as_view(), name="login"),
-    path("login/refresh/", TokenRefreshView.as_view(), name="refresh"), # Extend seesion time endpoint.
+    path("login/refresh/", TokenRefreshView.as_view(), name="refresh"), # Extend session time endpoint.
     path("logout/", views.LogoutView.as_view(), name="logout"),
 ]
