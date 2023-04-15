@@ -63,7 +63,6 @@ class RefreshTokenSerializer(serializers.Serializer):
     """
 
     refresh = serializers.CharField()
-    print(type(refresh))
 
     default_error_messages: Dict[str, str] = {
         "bad_token": ("Token is invalid or expired")
