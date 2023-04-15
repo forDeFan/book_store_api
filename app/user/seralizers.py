@@ -1,3 +1,5 @@
+"""User API related serializers."""
+
 from typing import Dict, List, OrderedDict
 
 from core.models import User
