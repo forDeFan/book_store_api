@@ -81,7 +81,7 @@ Content-Type: application/x-www-form-urlencoded
 email=test@example.com&password=00test00&name=test_name
 ```
 
-<img src="docs/register.png" alt="register" width="50%"/>
+<img src="docs/register.png" alt="register" width="100%"/>
 
 
 2. LOGIN to service as non admin user (JWT received in response body)
@@ -95,7 +95,7 @@ Content-Type: application/x-www-form-urlencoded
 
 email=test@example.com&password=00test00
 ```
-<img src="docs/login.png" alt="login" width="50%"/>
+<img src="docs/login.png" alt="login" width="100%"/>
 
 3. REFRESH token (taken from login), new pair of acces/ refresh token will be returned in response.
 
@@ -109,7 +109,7 @@ Content-Type: application/x-www-form-urlencoded
 refresh=refresh_jwt_token
 ```
 
-<img src="docs/refresh.png" alt="refresh" width="50%"/>
+<img src="docs/refresh.png" alt="refresh" width="100%"/>
 
 ### Book_API
 
@@ -144,7 +144,7 @@ Content-Disposition: form-data; name="images"; filename="your_image"
 
 ```
 
-<img src="docs/add_book.png" alt="create" width="65%" height="200px"/> <img src="docs/create_auth.png" alt="create_auth" width="30%" height="250px"/>
+<img src="docs/add_book.png" alt="create" width="65%" height="250px"/> <img src="docs/create_auth.png" alt="create_auth" width="30%" height="250px"/>
 
 4. UPDATE a book (must be admin user or got unathiorized - when regular user)
 <br>
