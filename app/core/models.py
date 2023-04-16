@@ -46,7 +46,9 @@ class Book(models.Model):
     """Book model class."""
 
     created = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=255, null=False, blank=False)
+    title = models.CharField(
+        max_length=255, null=False, blank=False, unique=True
+    )
     author = models.CharField(max_length=255, null=False, blank=False)
     published_date = models.DateField(blank=False)
     images = models.FileField(blank=True, upload_to="images/")
