@@ -80,8 +80,9 @@ Content-Type: application/x-www-form-urlencoded
 
 email=test@example.com&password=00test00&name=test_name
 ```
-
-<img src="docs/register.png" alt="register" width="100%"/>
+<p align=center>
+<img src="docs/register.png" alt="register" width="80%"/>
+</p>
 
 
 2. LOGIN to service as non admin user (JWT received in response body)
@@ -95,7 +96,9 @@ Content-Type: application/x-www-form-urlencoded
 
 email=test@example.com&password=00test00
 ```
-<img src="docs/login.png" alt="login" width="100%"/>
+<p align=center>
+<img src="docs/login.png" alt="login" width="80%"/>
+</p>
 
 3. REFRESH token (taken from login), new pair of acces/ refresh token will be returned in response.
 
@@ -108,8 +111,9 @@ Content-Type: application/x-www-form-urlencoded
 
 refresh=refresh_jwt_token
 ```
-
-<img src="docs/refresh.png" alt="refresh" width="100%"/>
+<p align=center>
+<img src="docs/refresh.png" alt="refresh" width="80%"/>
+<p>
 
 ### Book_API
 
@@ -143,19 +147,55 @@ Content-Type: multi-part/form-data
 Content-Disposition: form-data; name="images"; filename="your_image"
 
 ```
-
-<img src="docs/add_book.png" alt="create" width="100%"/> 
-<img src="docs/create_auth.png" alt="create_auth" width="30%" height="250px"/>
+<p align=center>
+<img src="docs/add_book.png" alt="add" width="80%"/> 
+</p>
+<p align=center>
+<img src="docs/create_auth.png" alt="add_auth" width="30%"/>
+</p>
 
 4. UPDATE a book (must be admin user or got unathiorized - when regular user)
 <br>
 JWT must be provided in header.
 <br>
+PATCH to http://0.0.0.0:8000/api/book/{book_id}/
 
+```
+PATCH /api/book/{book_id}/ HTTP/1.1
+Host: 0.0.0.0:8000
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {jwt_token_here}
 
-5. DELETE a book (must be admin user or got unathiorized - when regular user)
+{
+    "field_to_change": "value"
+}
+```
+<p align=center>
+<img src="docs/update.png" alt="update" width="80%"/> 
+</p>
+<p align=center>
+<img src="docs/create_auth.png" alt="add_auth" width="30%"/>
+</p>
 
+5. DELETE a book (must be admin user or got unathorized - when regular user)
+<br>
+JWT must be provided in header.
+<br>
 
+DELETE to http://0.0.0.0:8000/api/book/{book_id}/
+
+```
+DELETE /api/book/{book_id}/ HTTP/1.1
+Host: 0.0.0.0:8000
+Authorization: Bearer {jwt_token_here}
+
+```
+<p align=center>
+<img src="docs/delete.png" alt="delete" width="80%"/> 
+</p>
+<p align=center>
+<img src="docs/create_auth.png" alt="add_auth" width="30%"/>
+</p>
 
 ## Security
 
