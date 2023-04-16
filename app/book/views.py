@@ -53,6 +53,12 @@ class BookViewSet(viewsets.ModelViewSet):
             )
         if self.action in user_actions:
             permission_classes: Tuple = (AllowAny,)
+        
+        else:
+            permission_classes: Tuple = (
+                IsAdminUser,
+                IsAuthenticated,
+            )
 
         return [permission() for permission in permission_classes]
 
