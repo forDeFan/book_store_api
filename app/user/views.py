@@ -22,6 +22,7 @@ class CreateUserView(generics.CreateAPIView):
     (check if exist by email i.e.)
     """
 
+    permission_classes: permissions = (AllowAny,)
     serializer_class: UserSerializer = UserSerializer
 
 
@@ -41,6 +42,7 @@ class LogoutView(generics.GenericAPIView):
     API view to log out (refresh token blacklist).
     Access token will expire on setting defined time period itself.
     """
+    
     serializer_class = RefreshTokenSerializer
 
     def post(self, request: Request, *args):
