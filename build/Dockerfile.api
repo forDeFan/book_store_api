@@ -24,3 +24,9 @@ RUN python -m venv /py && \
 ENV PATH="/py/bin:$PATH"
 
 USER low_privilege_user
+
+# Start Django.
+CMD sh -c "python manage.py wait_for_database \
+    && python manage.py migrate --noinput \
+    && python manage.py collectstatic --no-input \
+    && gunicorn bookstore.wsgi:application --bind 0.0.0.0:8000"
