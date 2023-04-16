@@ -144,7 +144,8 @@ Content-Disposition: form-data; name="images"; filename="your_image"
 
 ```
 
-<img src="docs/add_book.png" alt="create" width="65%" height="250px"/> <img src="docs/create_auth.png" alt="create_auth" width="30%" height="250px"/>
+<img src="docs/add_book.png" alt="create" width="100%"/> 
+<img src="docs/create_auth.png" alt="create_auth" width="30%" height="250px"/>
 
 4. UPDATE a book (must be admin user or got unathiorized - when regular user)
 <br>
