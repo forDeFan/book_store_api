@@ -49,10 +49,12 @@ INSTALLED_APPS = [
     "bookstore",
     "core",
     "user",  # user api
+    "book",  # book api
     # Extra
-    "django_probes",
+    "django_probes",  # DB connection waiting
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",  # Logout from service
+    "django_filters",  # Book filtering
 ]
 
 MIDDLEWARE = [
@@ -169,4 +171,13 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+}
+
+
+# Rest framework settings
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ),
 }
