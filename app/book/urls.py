@@ -11,8 +11,8 @@ from django_filters.views import FilterView
 router = DefaultRouter()
 router.register("", views.BookViewSet)
 
-app_name = "Book"
+app_name = "book"
 
 urlpatterns = [
-    path("", include(router.urls)), 
-    path("list/", FilterView.as_view(model=Book), name="book-list"),]
+    path("", include(router.urls)),
+    ]
