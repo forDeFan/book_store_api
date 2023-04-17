@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",  # Logout from service
     "django_filters",  # Book filtering
+    "drf_spectacular",  # API docs
 ]
 
 MIDDLEWARE = [
@@ -181,10 +182,17 @@ SIMPLE_JWT = {
 # Rest framework settings
 
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_FILTER_BACKENDS": (
         "django_filters.rest_framework.DjangoFilterBackend",
     ),
+}
+
+# API Docs enable image upload in Swagger
+
+SPECTACULAR_SETTINGS = {
+    "COMPONENT_SPLIT_REQUEST": True,
 }
