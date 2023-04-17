@@ -40,6 +40,7 @@ c) Build and run the app (command given from same level where docker-compose and
 $ docker-compose up -d --build
 ```
 <br>
+The app will need couple seconds to be available at localhost - django will make db migrations and unicorn will start serving django after container up and ready.
 
 ## Interaction
 
@@ -47,18 +48,29 @@ For reviewer convenience admin and regular user are created at app start (thru d
 Some book records added also - to perform basic operations at app start.
 <br>
 Admin endpoint/panel also implemented for convenience (if needed). 
-<br>
+<br><br>
+SWAGGER DOCS AVAILABLE AT:<br>
+http://localhost:8000/api/docs/
 
 Default credentials:
 
-admin@example.com : password<br>
+admin@example.com : admin<br>
 user@example.com : password
 <br><br>
-If new Admin user needed - create it thru docker-compose in Django CLI
+If new Admin user needed - create it thru docker-compose in Django CLI.<br>
+The up containers should be up before commad issued.
 
 ```
 $ docker-compose run --rm app sh -c "python manage.py createsuperuser"
 ```
+
+Basic user actions flow thru API:
+
+a) new non admin user created thru /register/ endpoint<br>
+b) user or admin logs in to obtain JWT at /login/ endpoint<br>
+c) if token expired can be rened on /login/refresh/ endpoint<br>
+d) admin can add/modify/delete books on /book/ endpoint<br>
+e) user can search/list books on /book/ endpoint<br>
 
 <br>
 
@@ -144,7 +156,6 @@ POST /api/book/ HTTP/1.1
 Host: 0.0.0.0:8000
 Authorization: Bearer {jwt_token_here}
 Content-Type: multi-part/form-data
-Content-Disposition: form-data; name="images"; filename="your_image"
 
 ```
 <p align=center>
@@ -202,12 +213,17 @@ Authorization: Bearer {jwt_token_here}
 App log in/out proces is managed thru JWT in DRF.<br>
 JWT tokens last for 30 mins after that had to be refreshed on POST to <br>
 http://0.0.0.0:8000/api/user/login/refresh/ <br>
-With JWT refresh token received at login.
-<br><br>
+With JWT refresh token received at login.<br>
 All secret data (environmental variables) are set in .env file from which the app and docker fetch them up when needed (see .nev-example).
 
 ## Tests
-Fired up thru docker-compose. Made in Pytest.
+Fired up thru docker-compose. Made in Pytest.<br>
+Firsty database should be started if not already operational.
+
+```
+$ docker-compose up -d db
+```
+When db up:
 
 ```
 $ docker-compose run --rm app sh -c "python manage.py test"
