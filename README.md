@@ -54,7 +54,7 @@ http://localhost:8000/api/docs/
 
 Default credentials:
 
-admin@example.com : admin<br>
+admin@example.com : password<br>
 user@example.com : password
 <br><br>
 If new Admin user needed - create it thru docker-compose in Django CLI.<br>
