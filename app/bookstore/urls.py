@@ -11,8 +11,6 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
-    # Default django site - just to see something at app start.
-    path("", debug.default_urlconf),
     path("admin/", admin.site.urls),
     # Include endpoints from user api
     path("api/user/", include("user.urls")),

@@ -30,7 +30,7 @@ load_dotenv()
 SECRET_KEY = os.getenv("DJANGO_SEC_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Add localhost to allowed hosts - to be changed if deployed
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
@@ -196,3 +196,5 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     "COMPONENT_SPLIT_REQUEST": True,
 }
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
