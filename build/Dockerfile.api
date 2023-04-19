@@ -25,6 +25,9 @@ ENV PATH="/py/bin:$PATH"
 # Provide the user with write privilege to app folder - for collectstatic
 RUN chown -R low_privilege_user /app
 
+# Run collectstatic
+RUN python3 manage.py collectstatic --noinput
+
 USER low_privilege_user
 
 # Start Django.
