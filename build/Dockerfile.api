@@ -6,6 +6,11 @@ COPY ./build/requirements.txt /tmp/requirements.txt
 COPY ./app /app
 WORKDIR /app
 
+# Make dirs in order to avoid permission error from collecstatic
+RUN mkdir $WORKDIR/static && \
+    mkdir $WORKDIR/static/admin && \
+    mkdir $WORKDIR/static/rest_framework
+
 # Create virtual env inside container with low privileged user
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
