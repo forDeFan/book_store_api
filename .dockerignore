@@ -12,5 +12,6 @@ env
 .dockerignore
 .env_example
 README.md
-Dockerfile
+Dockerfile*
 /docs
+/nginx

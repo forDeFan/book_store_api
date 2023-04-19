@@ -2,6 +2,8 @@ version: "3.5"
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
 
 networks:
   bookstore_network:
@@ -11,27 +13,28 @@ networks:
 services:
 
   app:
-    # To pass constants from .env during build
     env_file:
-      - ./.env
+      - ./.env # To pass constants from .env during build
     build:
       context: .
       dockerfile: build/Dockerfile.api
     container_name: api
     restart: always
-    ports:
-      - "8000:8000"
-    # To get mirroring of container dirs to local folder/ two way relation
+    # To close local port for api and rely on nginx only
+    expose:
+      - 8000
     volumes:
-      - ./app:/app
+      - ./app:/app # To get mirroring of container dirs to local folder/ two way relation
+      - static_volume:/app/static # nginx serving
+      - media_volume:/app/media # nginx serving
     depends_on:
       - db
     networks:
       - bookstore_network
-  
+
   db:
     env_file:
-      - ./.env
+      - ./.env # To pass constants from .env during build
     build:
       context: .
       dockerfile: build/Dockerfile.db
@@ -44,5 +47,21 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
+    networks:
+      - bookstore_network
+
+  nginx:
+    container_name: nginx_proxy
+    build:
+      context: nginx
+      dockerfile: ../build/Dockerfile.nginx # Because of context
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+    depends_on:
+      - app
     networks:
       - bookstore_network
