@@ -3,6 +3,14 @@
 Django/ DRF API to manage books in a bookstore.<br>
 Made with gitflow pattern and conventional commits convention.
 
+Build with:
+
+* docker/ docker-compose
+* Python 3
+* Django 4
+* DRF
+* Gunicorn/ Nginx
+
 ## Explanation
 
 All GET request are public (no authentication nor authorization needed).<br>
@@ -50,7 +58,7 @@ Some book records added also - to perform basic operations at app start.
 Admin endpoint/panel also implemented for convenience (if needed). 
 <br><br>
 SWAGGER DOCS AVAILABLE AT:<br>
-http://localhost:8000/api/docs/
+http://localhost:80/api/docs/
 
 Default credentials:
 
@@ -78,35 +86,35 @@ e) user can search/list books on /book/ endpoint<br>
 
 Django Admin panel (default admin credentials can be used here)
 
-http://localhost:8000/admin
+http://localhost:80/admin
 
 
 1. CREATE new non admin user.
 
-POST to http://localhost:8000/api/user/register/
+POST to http://localhost:80/api/user/register/
 
 ```
 POST /api/user/register/ HTTP/1.1
-Host: localhost:8000
+Host: localhost:80
 Content-Type: application/x-www-form-urlencoded
 
-email=test@example.com&password=00test00&name=test_name
+email=test@example.com&password=password&name=test_name
 ```
 <p align=center>
 <img src="docs/register.png" alt="register" width="80%"/>
 </p>
 
 
-2. LOGIN to service as non admin user (JWT received in response body)
+2. LOGIN to service as admin/ non admin user (JWT received in response body)
 
-POST to http://localhost:8000/api/user/login/
+POST to http://localhost:80/api/user/login/
 
 ```
 POST /api/user/login/ HTTP/1.1
-Host: localhost:8000
+Host: localhost:80
 Content-Type: application/x-www-form-urlencoded
 
-email=test@example.com&password=00test00
+email=admin@example.com&password=password
 ```
 <p align=center>
 <img src="docs/login.png" alt="login" width="80%"/>
@@ -114,11 +122,11 @@ email=test@example.com&password=00test00
 
 3. REFRESH token (taken from login), new pair of acces/ refresh token will be returned in response.
 
-POST to http://localhost:8000/api/user/login/refresh/
+POST to http://localhost:80/api/user/login/refresh/
 
 ```
 POST /api/user/login/refresh/ HTTP/1.1
-Host: localhost:8000
+Host: localhost:80
 Content-Type: application/x-www-form-urlencoded
 
 refresh=refresh_jwt_token
@@ -131,19 +139,19 @@ refresh=refresh_jwt_token
 
 1. GET list of all books
 
-public GET to http://localhost:8000/api/book/
+public GET to http://localhost:80/api/book/
 
 2. FILTER thru existing books
 
-public GET to http://localhost:8000/api/book/?title=title-to-search-for
+public GET to http://localhost:80/api/book/?title=title-to-search-for
 <br>or<br>
-public GET to http://localhost:8000/api/book/?author=author-to-search-for
+public GET to http://localhost:80/api/book/?author=author-to-search-for
 <br>or<br>
-public GET to http://localhost:8000/api/book/?title=title-to-search-for&author=author-to-search-for
+public GET to http://localhost:80/api/book/?title=title-to-search-for&author=author-to-search-for
 
 3. ADD a book (must be admin user or got unathiorized - when regular user)
 
-POST to http://localhost:8000/api/book/
+POST to http://localhost:80/api/book/
 
 <br>
 JWT must be provided in header.
@@ -153,7 +161,7 @@ Body have to be selected as form-data and images field must be selected as file.
 
 ```
 POST /api/book/ HTTP/1.1
-Host: localhost:8000
+Host: localhost:80
 Authorization: Bearer {jwt_token_here}
 Content-Type: multi-part/form-data
 
@@ -169,11 +177,11 @@ Content-Type: multi-part/form-data
 <br>
 JWT must be provided in header.
 <br>
-PATCH to http://localhost:8000/api/book/{book_id}/
+PATCH to http://localhost:80/api/book/{book_id}/
 
 ```
 PATCH /api/book/{book_id}/ HTTP/1.1
-Host: localhost:8000
+Host: localhost:80
 Content-Type: application/x-www-form-urlencoded
 Authorization: Bearer {jwt_token_here}
 
@@ -185,7 +193,7 @@ Authorization: Bearer {jwt_token_here}
 <img src="docs/update.png" alt="update" width="80%"/> 
 </p>
 <p align=center>
-<img src="docs/create_auth.png" alt="add_auth" width="30%"/>
+<img src="docs/auth_patch.png" alt="add_auth" width="30%"/>
 </p>
 
 5. DELETE a book (must be admin user or got unathorized - when regular user)
@@ -193,11 +201,11 @@ Authorization: Bearer {jwt_token_here}
 JWT must be provided in header.
 <br>
 
-DELETE to http://localhost:8000/api/book/{book_id}/
+DELETE to http://localhost:80/api/book/{book_id}/
 
 ```
 DELETE /api/book/{book_id}/ HTTP/1.1
-Host: localhost:8000
+Host: localhost:80
 Authorization: Bearer {jwt_token_here}
 
 ```
@@ -205,14 +213,14 @@ Authorization: Bearer {jwt_token_here}
 <img src="docs/delete.png" alt="delete" width="80%"/> 
 </p>
 <p align=center>
-<img src="docs/create_auth.png" alt="add_auth" width="30%"/>
+<img src="docs/auth_del.png" alt="add_auth" width="30%"/>
 </p>
 
 ## Security
 
 App log in/out proces is managed thru JWT in DRF.<br>
 JWT tokens last for 30 mins after that had to be refreshed on POST to <br>
-http://localhost:8000/api/user/login/refresh/ <br>
+http://localhost:80/api/user/login/refresh/ <br>
 With JWT refresh token received at login.<br>
 All secret data (environmental variables) are set in .env file from which the app and docker fetch them up when needed (see .nev-example).
 
