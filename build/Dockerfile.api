@@ -5,7 +5,6 @@ ENV PYTHONUNBUFFERED 1
 COPY ./build/requirements.txt /tmp/requirements.txt
 COPY ./app /app
 WORKDIR /app
-EXPOSE 8000
 
 # Create virtual env inside container with low privileged user
 RUN python -m venv /py && \
@@ -22,6 +21,9 @@ RUN python -m venv /py && \
     low_privilege_user
 
 ENV PATH="/py/bin:$PATH"
+
+# Provide the user with write privilege to app folder - for collectstatic
+RUN chown -R low_privilege_user /app
 
 USER low_privilege_user
 
