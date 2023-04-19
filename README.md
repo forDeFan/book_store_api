@@ -83,11 +83,11 @@ http://localhost:8000/admin
 
 1. CREATE new non admin user.
 
-POST to http://0.0.0.0:8000/api/user/register/
+POST to http://localhost:8000/api/user/register/
 
 ```
 POST /api/user/register/ HTTP/1.1
-Host: 0.0.0.0:8000
+Host: localhost:8000
 Content-Type: application/x-www-form-urlencoded
 
 email=test@example.com&password=00test00&name=test_name
@@ -99,11 +99,11 @@ email=test@example.com&password=00test00&name=test_name
 
 2. LOGIN to service as non admin user (JWT received in response body)
 
-POST to http://0.0.0.0:8000/api/user/login/
+POST to http://localhost:8000/api/user/login/
 
 ```
 POST /api/user/login/ HTTP/1.1
-Host: 0.0.0.0:8000
+Host: localhost:8000
 Content-Type: application/x-www-form-urlencoded
 
 email=test@example.com&password=00test00
@@ -114,11 +114,11 @@ email=test@example.com&password=00test00
 
 3. REFRESH token (taken from login), new pair of acces/ refresh token will be returned in response.
 
-POST to http://0.0.0.0:8000/api/user/login/refresh/
+POST to http://localhost:8000/api/user/login/refresh/
 
 ```
 POST /api/user/login/refresh/ HTTP/1.1
-Host: 0.0.0.0:8000
+Host: localhost:8000
 Content-Type: application/x-www-form-urlencoded
 
 refresh=refresh_jwt_token
@@ -131,19 +131,19 @@ refresh=refresh_jwt_token
 
 1. GET list of all books
 
-public GET to http://0.0.0.0:8000/api/book/
+public GET to http://localhost:8000/api/book/
 
 2. FILTER thru existing books
 
-public GET to http://0.0.0.0:8000/api/book/?title=title-to-search-for
+public GET to http://localhost:8000/api/book/?title=title-to-search-for
 <br>or<br>
-public GET to http://0.0.0.0:8000/api/book/?author=author-to-search-for
+public GET to http://localhost:8000/api/book/?author=author-to-search-for
 <br>or<br>
-public GET to http://0.0.0.0:8000/api/book/?title=title-to-search-for&author=author-to-search-for
+public GET to http://localhost:8000/api/book/?title=title-to-search-for&author=author-to-search-for
 
 3. ADD a book (must be admin user or got unathiorized - when regular user)
 
-POST to http://0.0.0.0:8000/api/book/
+POST to http://localhost:8000/api/book/
 
 <br>
 JWT must be provided in header.
@@ -153,7 +153,7 @@ Body have to be selected as form-data and images field must be selected as file.
 
 ```
 POST /api/book/ HTTP/1.1
-Host: 0.0.0.0:8000
+Host: localhost:8000
 Authorization: Bearer {jwt_token_here}
 Content-Type: multi-part/form-data
 
@@ -169,11 +169,11 @@ Content-Type: multi-part/form-data
 <br>
 JWT must be provided in header.
 <br>
-PATCH to http://0.0.0.0:8000/api/book/{book_id}/
+PATCH to http://localhost:8000/api/book/{book_id}/
 
 ```
 PATCH /api/book/{book_id}/ HTTP/1.1
-Host: 0.0.0.0:8000
+Host: localhost:8000
 Content-Type: application/x-www-form-urlencoded
 Authorization: Bearer {jwt_token_here}
 
@@ -193,11 +193,11 @@ Authorization: Bearer {jwt_token_here}
 JWT must be provided in header.
 <br>
 
-DELETE to http://0.0.0.0:8000/api/book/{book_id}/
+DELETE to http://localhost:8000/api/book/{book_id}/
 
 ```
 DELETE /api/book/{book_id}/ HTTP/1.1
-Host: 0.0.0.0:8000
+Host: localhost:8000
 Authorization: Bearer {jwt_token_here}
 
 ```
@@ -212,7 +212,7 @@ Authorization: Bearer {jwt_token_here}
 
 App log in/out proces is managed thru JWT in DRF.<br>
 JWT tokens last for 30 mins after that had to be refreshed on POST to <br>
-http://0.0.0.0:8000/api/user/login/refresh/ <br>
+http://localhost:8000/api/user/login/refresh/ <br>
 With JWT refresh token received at login.<br>
 All secret data (environmental variables) are set in .env file from which the app and docker fetch them up when needed (see .nev-example).
 
